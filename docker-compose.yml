@@ -1,0 +1,26 @@
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres
+    environment: 
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: book_network
+    ports:
+      - 5433:5432
+    networks:
+      - spring-boot-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: mail-dev-book
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+networks:
+  spring-boot-net:
+volumes:
+  postgres-data:
